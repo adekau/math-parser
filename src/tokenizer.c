@@ -43,6 +43,7 @@ void tokenizer_add(tokenizer *t, char *regex, int token) {
 void *print_tokens(ll_node *node) {
     token_info *info = (token_info *)(node->data);
     printf("Token: %c\n", info->token);
+    return NULL;
 }
 
 int main(int argc, char **argv) {
