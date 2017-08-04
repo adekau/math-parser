@@ -7,7 +7,6 @@
 extern "C" {
 #endif
 
-
 typedef struct {
 	regex_t regc;
 	int token;
@@ -15,7 +14,13 @@ typedef struct {
 
 typedef struct {
 	linkedlist *infos;
+	linkedlist *tokens;
 } tokenizer;
+
+typedef struct {
+	int token;
+	char *sequence;
+} token;
 
 #ifdef __C_PLUS_PLUS
 }

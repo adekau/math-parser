@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 
-static inline char ll_empty(linkedlist *ll) {
+char ll_empty(linkedlist *ll) {
 	return !ll->last || !ll->root;
 }
 
@@ -43,4 +43,23 @@ void ll_iterate(linkedlist *ll, void *(*callback)(ll_node *node)) {
 		callback(cur_node);
 		if (cur_node->next) cur_node = cur_node->next;
 	}
+}
+
+void ll_free(linkedlist *ll, ll_node *recurse) {
+	if (ll_empty(ll)) {
+		free(ll);
+		return;
+	}
+
+	ll_node *cursor, *tmp;
+	cursor = ll->root;
+	ll->root = NULL;
+	ll->last = NULL;
+	while (cursor != NULL) {
+		tmp = cursor->next;
+		free(cursor);
+		cursor = tmp;
+	}
+
+	free(ll);
 }
