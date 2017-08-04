@@ -95,7 +95,7 @@ void tokenizer_run(tokenizer *t, char *str) {
 	ll_node *cur;
 	int ereg, matched_len;
 	size_t nmatch = 1;                                                        
-    regmatch_t pmatch[1];
+	regmatch_t pmatch[1];
 
 	ll_free(t->tokens); // Clear the existing linked list.
 	t->tokens = ll_init();
