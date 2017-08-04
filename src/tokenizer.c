@@ -90,7 +90,7 @@ void tokenizer_run(tokenizer *t, char *str) {
 	if (ll_empty(t->infos)) return;
 
 	char msgbuf[100];
-	char *str2 = strdup((const char *)str);
+	char *str2 = trim(strdup((const char *)str));
 	char match;
 	ll_node *cur;
 	int ereg, matched_len;
@@ -116,11 +116,12 @@ void tokenizer_run(tokenizer *t, char *str) {
 				for (int i = 0; i < matched_len; i++) str2++;
 				str2 = trim(str2);
 
-				puts(str2);
 				token *tok = token_init(((token_info *)cur->data)->token, matched);
 				ll_add(t->tokens, (const void *)tok);
+
+				break;
 			} else if (ereg == REG_NOMATCH) {
-				// Potentially do nothing..
+				//
 			} else {
 				regerror(ereg, &((token_info *)cur->data)->regc, msgbuf, sizeof(msgbuf));
 				fprintf(stderr, "Regex match failed: %s\n", msgbuf);
@@ -129,6 +130,12 @@ void tokenizer_run(tokenizer *t, char *str) {
 
 			if (cur->next) cur = cur->next;
 		}
+
+		if (!match) {
+			fprintf(stderr, "Unexpected character encountered during tokenization. Remaining string: %s\n", str2); 
+			return;
+		}
+
 	}
 }
 
@@ -157,7 +164,7 @@ int main(int argc, char **argv) {
 
 	//ll_iterate(tokenizer->infos, &print_token_infos);
 	char str[100];
-	strcpy(str, "5+3 * 5 / sin(42)");
+	strcpy(str, "     sin(x) * (1 + var_12) ");
 	tokenizer_run(tokenizer, str);
 	ll_iterate(tokenizer->tokens, &print_tokens);
 
