@@ -45,7 +45,7 @@ void ll_iterate(linkedlist *ll, void *(*callback)(ll_node *node)) {
 	}
 }
 
-void ll_free(linkedlist *ll, ll_node *recurse) {
+void ll_free(linkedlist *ll) {
 	if (ll_empty(ll)) {
 		free(ll);
 		return;

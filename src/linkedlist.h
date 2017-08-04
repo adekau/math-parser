@@ -17,8 +17,10 @@ typedef struct {
 } linkedlist;
 
 linkedlist *ll_init();
+char ll_empty(linkedlist *ll);
 void ll_add(linkedlist *ll, const void *data);
 void ll_iterate(linkedlist *ll, void *(*callback)(ll_node *node));
+void ll_free(linkedlist *ll);
 
 #ifdef __C_PLUS_PLUS
 }
