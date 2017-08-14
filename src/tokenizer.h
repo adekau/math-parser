@@ -1,7 +1,7 @@
 #include "linkedlist.h"
 
-#ifndef __TOKENIZER_C_
-#define __TOKENIZER_C_
+#ifndef __TOKENIZER_H_
+#define __TOKENIZER_H_
 
 #ifdef __C_PLUS_PLUS
 extern "C" {
